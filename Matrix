@@ -1,0 +1,80 @@
+r=int(input("Enter no of rows:"))
+c=int(input("Enter no of columns:"))
+A=[[0 for j in range(c)]for i in range(r)]
+for i in range(r):
+    for j in range(c):
+        A[i][j]=int(input("Enter the elements of matrix A:"))
+
+print("Matrix A:",A)
+p=int(input("Enter no of rows:"))
+q=int(input("Enter no of columns:"))
+B=[[0 for j in range(q)]for i in range(p)]
+for i in range(p):
+    for j in range(q):
+        B[i][j]=int(input("Enter the elements of matrix B:"))
+        
+print("Matrix B:",B)
+
+result=[[0 for j in range(c)]for i in range(r)] 
+
+def add():
+    for i in range(r):
+        for j in range(c):
+            result[i][j]=A[i][j]+B[i][j]    
+    print("Addition Matrix:",result) 
+    
+def sub():
+    for i in range(r):
+        for j in range(c):
+            result[i][j]=A[i][j]-B[i][j]    
+    print("Subtraction Matrix:",result)
+    
+def mul():
+    for i in range(r):
+        for j in range(q):
+            for k in range(c):
+                result[i][j]=A[i][j]*B[i][j] 
+    print("Multiplication matrix:",result)
+    
+def transpose():
+    s=input("Select a matrix to transpose(A/B):")
+    for i in range(r):
+        for j in range(c):
+            if s=="A" or "a":
+                result[j][i]=A[i][j]
+            elif s=="B" or "b":
+                result[j][i]=B[i][j]
+    print("Transpose of matrix:",result)
+    
+def mainmenu():
+    print("\n1.Addition\n2.Subtraction\n3.Multiplication\n4.Transpose\n5.Exit")
+    
+while True:
+    mainmenu()
+    ch=int(input("Enter a choice:"))
+    if ch==1:
+        if r==p and c==q:
+            add()
+        else:
+            print("Matrix Operation Not Possible")
+    elif ch==2:
+        if r==p and c==q:
+            sub()
+        else:
+            print("Matrix Operation Not Possible") 
+    elif ch==3:
+        if c==p:
+            mul()
+        else:
+            print("Matrix Operation Not Possible") 
+    elif ch==4:
+        transpose()
+    elif ch==5:
+        False
+        break
+    else:
+        print("Enter a valid choice")
+            
+
+
+    
