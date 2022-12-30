@@ -1,0 +1,101 @@
+arr=[["sanket",9922066691],["kunal",6464646466]]
+print("PhoneBook:",arr)
+n=len(arr)
+
+def binarysearch(arr,search):
+    low=0
+    high=n-1
+    while low<=high:
+        mid=(low+high)//2
+        if arr[mid][0]==search:
+            return mid
+        elif arr[mid][0]<search:
+            low=mid+1
+        elif arr[mid][0]>search:
+            high=mid-1
+    return -1
+    
+def fibonacci(arr,search,n): 
+    f2=0 
+    f1=1 
+    fm=f2+f1
+    while fm<n:
+        f2=f1
+        f1=fm
+        fm=f2+f1
+    offset=-1
+    while fm>1:
+        i=min(offset+f2,n-1)
+        if arr[i][0]<search:
+            fm=f1
+            f1=f2
+            f2=fm-f1
+            offset=i
+        elif arr[i][0]>search:
+            fm=f2
+            f1=f1-f2
+            f2=fm-f1
+        else:
+            return i 
+        if f1 and arr[offset+1]==search:
+            return offset+1 
+    return -1
+            
+    
+def insert():
+    c=[name]
+    mob=int(input("Enter the mobile no:"))
+    c.append(mob)
+    print(c)
+    arr.append(c)
+    print(arr)
+    
+def sort():
+    for j in range(n):
+        i=0
+        while i<n:
+            if arr[i][0]>arr[i+1][0]:
+                arr[i],arr[i+1]=arr[i+1],arr[i]
+            i=i+1
+    print(arr)
+    
+def mainmenu():
+    print("\n1.Binary Search\n2.Fibonacci Search\n3.Exit")
+
+while True:
+    mainmenu()
+    ch=int(input("Enter a choice:"))
+    
+    if ch==1:
+        name=input("Enter a name to search in lowercase:")
+        index=binarysearch(arr,name)
+        if index==-1:
+            print("Search Not Found \n To add number")
+            insert()
+            print("Sorted Phonebook")
+            sort()
+        else:
+            print("Search Found")
+    elif ch==2:
+        name=input("Enter a name to search in lowercase:")
+        index=fibonacci(arr,name,n)
+        if index==-1:
+            print("Search Not Found \n To add number")
+            insert()
+            print("Sorted Phonebook")
+            sort()
+        else:
+            print("Search Found")
+    elif ch==3:
+        False
+        break
+    else:
+        print("Enter a valid choice")
+        
+    
+
+
+
+
+            
+        
