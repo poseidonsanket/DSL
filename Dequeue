@@ -1,0 +1,105 @@
+#include<bits/stdc++.h>
+using namespace std;
+class Queue{
+    public:
+    int r,f,num,arr[20];
+    Queue(){
+        r=-1;
+        f=-1;
+    }
+    
+    void insert(){
+        cout<<"Enter the element to insert:";
+        cin>>num;
+        if(r==-1 && f==-1){
+            r=r+1;
+            f=f+1;
+            arr[r]=num;
+        }
+        else{
+            r=r+1;
+            arr[r]=num;
+        }
+    }
+    
+    void delete1(){
+        
+        num=arr[f];
+        if(r==f){
+            r=-1;
+            f=-1;
+            cout<<"Queue is empty";
+        
+        }
+        else{
+            f=f+1;
+            
+        }
+        cout<<"Deleted Element"<<num<<endl;
+    }
+    
+    void display(){
+        for(int i=f;i<=r;i++){
+            cout<<arr[i]<<endl;
+        }
+    }
+    
+    void insertf(){
+        cout<<"Enter the job:";
+        cin>>num;
+        if(r==-1 && f==-1){
+            r=r+1;
+            f=f+1;
+            arr[f]=num;
+        }
+        else{
+            f=f-1;
+            arr[f]=num;
+            
+        }
+    }
+    
+    void deleter(){
+        num=arr[r];
+        if(r==f){
+            r=-1;
+            f=-1;
+            cout<<"Queue is empty";
+        }
+        else{
+            r=r-1;
+            
+        }
+        cout<<"Deleted Element"<<num;
+    }
+
+};
+int main(){
+    int ch;
+    Queue q;
+    do{
+        cout<<"\n1.Insert\n2.Delete\n3.Display\n4.Insert Front\n5.Delete Rear\n6.Exit";
+        cout<<"\nEnter a choice:";
+        cin>>ch;
+        switch(ch){
+            case 1:
+            q.insert();
+            break;
+            case 2:
+            q.delete1();
+            break;
+            case 3:
+            q.display();
+            break;
+            case 4:
+            q.insertf();
+            break;
+            case 5:
+            q.deleter();
+            break;
+            
+        }
+    }
+    while(ch!=6);
+    return 0;
+}
