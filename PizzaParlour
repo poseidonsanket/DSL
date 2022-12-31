@@ -18,7 +18,7 @@ class cqueue{
             return true;
         }
         else{
-            r=(+1)%MAX;
+            r=(r+1)%MAX;
             arr[r]=id;
             return true;
         }
