@@ -1,131 +1,88 @@
-/* C++ implementation to convert
-infix expression to postfix*/
-
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
 
-// Function to return precedence of operators
-int prec(char c)
-{
-	if (c == '^')
-		return 3;
-	else if (c == '/' || c == '*')
-		return 2;
-	else if (c == '+' || c == '-')
-		return 1;
-	else
-		return -1;
+int prec(char c){
+    if(c=='^'){
+        return 3;
+    }
+    else if(c=='/' || c=='*'){
+        return 2;
+    }
+    else if(c=='+' || c=='-'){
+        return 1;
+    }
+    else{
+        return -1;
+    }
 }
 
-// The main function to convert infix expression
-// to postfix expression
-string infixToPostfix(string s)
-{
-
-	stack<char> st; // For stack operations, we are using
-					// C++ built in stack
-	string result;
-
-	for (int i = 0; i < s.length(); i++) {
-		char c = s[i];
-
-		// If the scanned character is
-		// an operand, add it to output string.
-		if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z')
-			|| (c >= '0' && c <= '9'))
-			result += c;
-
-		// If the scanned character is an
-		// ‘(‘, push it to the stack.
-		else if (c == '(')
-			st.push('(');
-
-		// If the scanned character is an ‘)’,
-		// pop and to output string from the stack
-		// until an ‘(‘ is encountered.
-		else if (c == ')') {
-			while (st.top() != '(') {
-				result += st.top();
-				st.pop();
-			}
-			st.pop();
-		}
-
-		// If an operator is scanned
-		else {
-			while (!st.empty()
-				&& prec(s[i]) <= prec(st.top())) {
-				result += st.top();
-				st.pop();
-			}
-			st.push(c);
-		}
-	}
-
-	// Pop all the remaining elements from the stack
-	while (!st.empty()) {
-		result += st.top();
-		st.pop();
-	}
-
-	return result;
-	
-}
-
-int evaluatePostfixExpression(string expression) {
-    // Defining an stack of integer type.
-    stack<int> st;
-
-    // Traversing in the expression from left 
-    // to right. 
-    for (int i = 0; i < expression.length(); i++){
-        char c = expression[i];
-
-        // If 'c' is a digit (operand)
-        if (c >= '0' && c <= '9'){
-            // Convert 'c' in integer and
-            // push it into the stack.
-            int temp = (int)(c - '0');
-            st.push(temp);
+string infixtopostfix(string s){
+    stack <char> st;
+    string result;
+    for(int i=0;i<s.length();i++){
+        char c=s[i];
+        if(c>='a' && c<='z'|| c>='A' && c<='Z'|| c>='0' && c<='9'){
+            result+=c;
         }
-        // Otherwise it is an operator.
-        else{
-            // Pop element from the stack.
-            int op1 = st.top();
-            st.pop();
-            // Pop another element from the stack. 
-            int op2 = st.top();
-            st.pop();
-
-            // Use the switch case to deal with
-            // the operand accordingly.
-            switch(c){
-                case '+':
-                    st.push(op2 + op1);
-                    break;
-                case '-':
-                    st.push(op2 - op1);
-                    break;
-                case '*':
-                    st.push(op2 * op1);
-                    break;    
-                case '/':
-                    st.push(op2 / op1);
-                    break;
+        else if(c=='('){
+            st.push('(');
+        }
+        else if(c==')'){
+            while(st.top()!='('){
+                result+=st.top();
+                st.pop();
             }
+            st.pop();
+        }
+        else{
+            while(!st.empty() && prec(s[i])<=prec(st.top())){
+                result+=st.top();
+                st.pop();
+            }
+            st.push(c);
         }
     }
-    
-    // Return the element at the top 
-    // of the stack.
-    return st.top();
+    while(!st.empty()){
+        result+=st.top();
+        st.pop();
+    }
+    return result;
 }
 
-
-// Driver's code
-int main()
-{
-	string infix,postfix;
+int evaluation(string s){
+    stack <int> st;
+    for(int i=0;i<s.length();i++){
+        char c=s[i];
+        if(c>='0' && c<='9'){
+            int temp=(int)(c- '0');
+            st.push(temp);
+        }
+        else{
+            int op1=st.top();
+            st.pop();
+            int op2=st.top();
+            st.pop();
+            switch(c){
+                case '+':
+                st.push(op2+op1);
+                break;
+                case '-':
+                st.push(op2-op1);
+                break;
+                case '*':
+                st.push(op2*op1);
+                break;
+                case '/':
+                st.push(op2/op1);
+                break;
+            }
+            
+        }
+    }
+    return st.top();
+}
+int main(){
+    string infix,postfix;
 	cout<<"Enter the infix Expression:";
 	cin>>infix;
 	int ch;
@@ -135,11 +92,11 @@ int main()
 	    cin>>ch;
 	    switch(ch){
 	        case 1:
-	        postfix=infixToPostfix(infix);
+	        postfix=infixtopostfix(infix);
 	        cout<<"Postflix Expression:"<<postfix;
 	        break;
 	        case 2:
-	        cout<<"Evaluation:"<<evaluatePostfixExpression(postfix);
+	        cout<<"Evaluation:"<<evaluation(postfix);
 	        break;
 	    }
 	    
@@ -147,6 +104,6 @@ int main()
 	while(ch!=3);
 	return 0;
 
-	// Function call
-	
 }
+
+
