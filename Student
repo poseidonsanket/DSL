@@ -38,11 +38,8 @@ def minimum():
     print("Minimum:",minimum)
     
 def frequency():
-    count=marks[0]
-    for i in marks:
-        if i==count:
-            count=i 
-    print("Frequency:",count)
+    fre=max(set(marks),key=marks.count)
+    print("Frequency:",fre)
     
 def mainmenu():
     print("\n1.Average\n2.Maximum and Minimum\n3.Absent\n4.Frequency\n5.Exit")
@@ -64,5 +61,6 @@ while True:
         break
     else:
         print("Enter a valid choice")
+
 
     
