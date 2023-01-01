@@ -1,240 +1,312 @@
 #include<iostream>
 using namespace std;
-
-int size;	
-
-struct SLL_Node	
+struct Node
 {
-    int start;
-    int end;
-    int min;
-    int max;
-    int flag;
-    struct SLL_Node *next;
-}*head;
-
-
-class App_Shedule
+    int start,end,min,max;
+    bool status;
+    struct Node *next;
+};
+class Schedule
 {
-  public:
-	void create_Shed();
-         	 
-	void display_Shed();
-
-	void book_App();
-
-	void cancel_App();
-
-	void sort_App();
-	
-}A1;
-
-
-int main()
-{
-   int ch;
-   char ans;
-   
-   do
-   {    
-      cout<<"\n Menu";
-      cout<<"\n 1. Create Appointment Schedule";
-      cout<<"\n 2. Display Free Slots";
-      cout<<"\n 3. Book an Appointment";
-      cout<<"\n 4. Cancel an Appointment";
-      cout<<"\n 5. Sort slots based on Time";
-
-      
-      cout<<"\n\n Enter your choice: ";                        
-      cin>>ch;
-      
-      switch(ch)
-      {
-         case 1: A1.create_Shed();
-         	 break;
-         	 
-         case 2: A1.display_Shed();
-         	 break;         	 
-         	 
-         case 3: A1.book_App();
-         	 break;
-         	 
-         case 4: A1.cancel_App();
-         	 break;
-
-         case 5: A1.sort_App();
-         	 break;
-         	 
-         default: cout<<"\n Wrong choice";
-	          	 
-      }
-      
-      cout<<"\n\n Do you wanna continue? (y/n) : ";
-      cin>>ans;
-   }while(ans == 'y');
-   
-}
-
-
-void App_Shedule :: create_Shed()           
-{ 
-    int i;
-    struct SLL_Node *temp, *last;
-    
-    head = NULL;
-    
-    cout<<"\n\n How many Appointment Slots: ";
-    cin>>size;
-    
-    for(i=0; i<size; i++)
+    private:
+    int size;
+    Node *head; // Head of the Linked List
+    public:
+    Schedule()
     {
-       temp = new(struct SLL_Node);         
-       cout<<"\n\n Enter Start Time: ";   
-       cin>>temp->start; 
-       cout<<"\n\n Enter End Time: ";
-       cin>>temp->end;
-       cout<<"\n\n Enter Minimum Duration: ";
-       cin>>temp->min;
-       cout<<"\n\n Enter Maximum Duration: ";
-       cin>>temp->max;
-         temp->flag = 0;
-       temp->next = NULL;
-       
-       if(head == NULL)
-       {
-          head = temp;
-          last = head;
-       }
-       else
-       {
-          last->next = temp;
-          last = last->next;
-       }
-       
+        head = NULL;
+    }
+    void create_Schedule();
+    void display_Schedule();
+    void display_Free();
+    void book_App();
+    void cancel_App();
+    void sort_App1();
+    void sort_App2();
+};
+void Schedule :: create_Schedule()
+{
+    int i;
+    Node *temp,*last;
+    head =NULL;
+    cout<<"\n\t How many Appointment Slots :";
+    cin>>size;
+    for(int i=0;i<size;i++)
+    {
+        cout<<"\nEnter information of slot"<<i+1;
+        temp=new Node;
+        cout<<"\n\n\t Enter Start Time :";
+        cin>>temp->start;
+        cout<<"\n\tEnter End Time :";
+        cin>>temp->end;
+        cout<<"\n\n\tEnter Minimum Duration(in hrs) :";
+        cin>>temp->min;
+        cout<<"\n\t Enter Maximum Duration(in hrs) :";
+        cin>>temp->max;
+        temp->status = false;
+        temp->next = NULL;
+        if(head == NULL)
+        {
+            head=temp;
+            last=head;
+        }
+        else
+        {
+            last->next = temp;
+            last=last->next;
+        }
+    }
+}
+void Schedule :: display_Schedule()
+{
+    Node *temp;
+    bool flag = true;
+    temp=head;
+    if(head == NULL)
+    {
+        cout<<"\n\t Schedule not created";
+    }
+    else
+    {
+        while(temp !=NULL)
+        {
+            cout<<"\n\n\t Start Time :"<<temp->start;
+            cout<<"\n\tEnd Time :"<<temp->end;
+            cout<<"\n\t Maximum Duration :"<<temp->max;
+            if(temp->status)
+            {
+                cout<<"\n\t Status: Booked";
+                flag=false;
+            }
+            else
+            {
+                cout<<"\n\t Status : Free";
+            }
+            temp=temp->next;
+        }
+        if(flag)
+        {
+            cout<<"\n\n\t No Appointment Booked";
+        }
     }
 }
 
-	 
-void App_Shedule :: display_Shed()                   
+void Schedule :: display_Free()
 {
-   int cnt = 1;
-   struct SLL_Node *temp;
-   
-   cout<<"\n\n Appointment Schdule";
-   cout<<"\n\n Srno.\tStart\tEnd\tMin_Dur\tMax_Dur\tStatus";        
-   
-   temp = head;
-   while(temp != NULL)
-   {
-      cout<<"\n\n "<<cnt;
-      cout<<"\t "<<temp->start;
-      cout<<"\t "<<temp->end;
-      cout<<"\t  "<<temp->min;
-      cout<<"\t  "<<temp->max;
-      
-      if(temp->flag)
-         cout<<"\tBooked";                        
-      else
-         cout<<"\tFree";         
-         
-      temp = temp->next; 
-      cnt++;  
-   }
+    Node *temp;
+    bool flag = true;
+    temp=head;
+    if(head==NULL)
+    {
+        cout<<"\n\t Schedule not created";
+
+    }
+    else
+    {
+        cout<<"\n\n\t Free slots :";
+        while(temp !=NULL)
+        {
+            if(temp->status == false)
+            {
+                cout<<"\n\n\t Start Time :"<<temp->start;
+                cout<<"\n\t End Time :"<<temp->end;
+                cout<<"\n\t Minimum Duration :"<<temp->min;
+                cout<<"\n\t Maximum Duration :"<<temp->max;
+                flag=false;
+            }
+            temp=temp->next;
+        }
+        if(flag)
+        {
+            cout<<"\n\n\t No Free Slots";
+
+        }
+    }
 }
 
+void Schedule :: book_App()
+{
+    display_Free();
+    int start;
+    if(head !=NULL)
+    {
+        cout<<"\n\n\t Enter the Start Time of the Appointment Slot you want to book:";
+        cin>>start;
+        Node *temp;
+        temp=head;
+        while(temp !=NULL)
+        {
+            if(temp->status)
+            {
+                cout<<"\n\n\t Appointment Slot is already Booked!";
+                break;
+            }
+            else
+            {
+                temp->status = true;
+                cout<<"\n\n\t Appointment Booked Successfully!";
+                break;
+            }
+        temp=temp->next;
+        }
 
-void App_Shedule :: book_App()              
+    }
+}
+void Schedule :: cancel_App()
 {
     int start;
-    struct SLL_Node *temp;
-
-    cout<<"Please enter Appointment time: "<<endl;
+    cout<<"\n\n\t Enter the Start Time of the Appointment SLot you want to cancel";
     cin>>start;
- 
-   temp = head;
-
-   while(temp != NULL)
-   {
-      if(start == temp->start)
-      {
-         if(temp->flag == 0)
-         {
-            cout<<"Appointment Slot is Booked"<<endl;
-            temp->flag = 1;
-         }
-         else
-            cout<<" Appointment Slot is not Available"<<endl;
-      }
-
-      temp = temp->next; 
-   }
-
+    Node *temp;
+    temp=head;
+    while(temp !=NULL)
+    {
+        if(temp->start==start)
+        {
+            if(temp->status)
+            {
+                temp->status = false;
+                cout<<"\n\n\t Appointment Cancelled Successfully!";
+                break;
+            }
+            else
+            {
+                cout<<"\n\n\t Appointment SLot is already Free!";
+                break;
+            }
+        }
+        temp = temp->next;
+    }
 }
-      
-         
 
-void App_Shedule :: cancel_App()          
+void Schedule :: sort_App1()
 {
-    int start;
-    struct SLL_Node *temp;
-
-    cout<<" Please enter Appointment time to Cancel: "<<endl;
-    cin>>start;
- 
-   temp = head;
-
-   while(temp != NULL)
-   {
-      if(start == temp->start)
-      {
-         if(temp->flag == 1)
-         {
-            cout<<"Your Appointment Slot is Canceled"<<endl;
-            temp->flag = 0;
-         }
-         else
-            cout<<"appointment was not book"<<endl;
-      }
-
-      temp = temp->next; 
-   }
+    int i,val;
+    Node *temp;
+    for(i=0;i<size-1;i++)
+    {
+        temp=head;
+        while(temp->next !=NULL)
+        {
+            if(temp->start > temp->next->start)
+            {
+                val=temp->start;
+                temp->start = temp->next->start;
+                temp->next->start =val;
+                val=temp->end;
+                temp->end=temp->next->end;
+                temp->next->end=val;
+                val=temp->min;
+                temp->min=temp->next->min;
+                val=temp->max;
+                temp->max=temp->next->max;
+                temp->next->max=val;
+            }
+            temp=temp->next;
+        }
+    }
+    cout<<"\n\n\t The Appointments are Sorted!!!";
 }
 
-
-void App_Shedule :: sort_App()              
+void Schedule :: sort_App2()
 {
-   int i,j,val;
-   struct SLL_Node *temp;
+    int i;
+    Node *temp,*temp2,*temp3,*temp4;
+    for(i=0;i<size-1;i++)
+    {
+        temp=head;
+        while(temp->next !=NULL)
+        {
+            if(temp->start > temp->next->start)
+            {
+                if(temp == head)
+                {
+                    temp2=temp->next;
+                    temp3=temp2->next;
+                    temp->next=temp3;
+                    temp2->next=temp;
+                    head=temp2;
 
-
-   for(i=0; i < size-1; i++) 	
-   {
-       temp = head;
-       while(temp->next != NULL)
-       { 
-          if(temp->start > temp->next->start)
-          {
-              val = temp->start;
-	      temp->start = temp->next->start;
-	      temp->next->start = val;
-
-              val = temp->end;
-	      temp->end = temp->next->end;
-	      temp->next->end = val;
-
-              val = temp->min;
-	      temp->min = temp->next->min;
-	      temp->next->min = val;
-
-              val = temp->max;
-	      temp->max = temp->next->max;
-	      temp->next->max = val;
-	
-          }
-          temp = temp->next;
-       }   
-   }
-
-   cout<<"\n\n\t The Appointments got Sorted";
-
+                }
+                else
+                {
+                    temp2=temp->next;
+                    temp3=temp2->next;
+                    temp4=head;
+                    while(temp4->next !=temp)
+                    {
+                        temp4=temp4->next;
+                    }
+                    temp->next=temp3;
+                    temp2->next=temp;
+                    temp4->next=temp2;
+                }
+            }
+            temp=temp->next;
+        }
+    }
+    cout<<"\n\n\t The Appointments are Sorted!!!";
 }
+
+int main()
+{
+    int choice=0;
+    Schedule S1;
+    do
+    {
+        cout<<"\n\n\t ****MENU****";
+        cout<<"\n1.Create Appointment Schedule";
+        cout<<"\n2.Display Appointment Schedule";
+        cout<<"\n3.Display Free Slots";
+        cout<<"\n4.Book an Appointment";
+        cout<<"\n5.Cancel an Appointment";
+        cout<<"\n6.Sort slots based on Time";
+        cout<<"\n7.Sort slots based on TIme using Pointer Manipulation";
+        cout<<"\n8.Exit";
+        cout<<"\nEnter your choice :";
+        cin>>choice;
+        switch(choice)
+        {
+            case 1:
+            S1.create_Schedule();
+            break;
+            case 2:
+            S1.display_Schedule();
+            break;
+            case 3:
+            S1.display_Free();
+            break;
+            case 4:
+            S1.book_App();
+            break;
+            case 5:
+            S1.cancel_App();
+            break;
+            case 6:
+            cout<<"\n\t Sorted Appointment Schedule based on time";
+            S1.sort_App1();
+            break;
+            case 7:
+            cout<<"\n\t Sorted Appointment Schedule based on time using Pointer Manipulation";
+            S1.sort_App2();
+            break;
+            case 8:
+            cout<<"\n\t Wrong choice!!!";
+        }
+    } while (choice !=8);
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
