@@ -1,49 +1,48 @@
 marks=[]
-n=int(input("Enter no of students:"))
+n=int(input("Enter the no of students:"))
 for i in range(n):
-    stu=int(input("Enter marks of student in FDS, If absent enter 0:"))
+    stu=int(input("Enter the marks of students in FDS, if student is absent enter 0:"))
     marks.append(stu)
     
-def average():
-    avg=0
+def avg():
+    ab=0
     sum1=0
-    ab=0;
     for i in range(n):
-        if marks[i]==0:
-            ab+=1 
+        if i==0:
+            ab+=1
         else:
             sum1+=marks[i]
-    avg=sum1/(n-ab)
-    print("Average:",avg)
-    
-def maximum():
-    maximum=marks[0]
-    for i in marks:
-        if i>maximum:
-            maximum=i
-    print("Maximum:",maximum)
-    
-def minimum():
-    minimum=marks[0]
-    for i in marks:
-        if i<minimum:
-            minimum=i 
-    print("Minimum:",minimum)
+    print("Average:",sum1/(n-ab))
     
 def absent():
     ab=0
     for i in marks:
         if i==0:
-            ab=ab+1
-    print("Absent students:",ab)
+            ab+=1 
+    print("Absent:",ab)
     
+def maximum():
+    maximum=marks[0]
+    for i in marks:
+        if i>maximum:
+            maximum=i 
+    print("Maximum:",maximum)
+
+def minimum():
+    minimum=marks[0]
+    for i in marks:
+        if i==0:
+            continue
+        elif i<minimum:
+            minimum=i 
+    print("Minimum:",minimum)
     
-def fre():
+def frequency():
     count=marks[0]
     for i in marks:
         if i==count:
-            count=i
-    print("Maximum Frequency:",count)
+            count=i 
+    print("Frequency:",count)
     
 def mainmenu():
     print("\n1.Average\n2.Maximum and Minimum\n3.Absent\n4.Frequency\n5.Exit")
@@ -52,17 +51,18 @@ while True:
     mainmenu()
     ch=int(input("Enter a choice:"))
     if ch==1:
-        average()
+        avg()
     elif ch==2:
         maximum()
         minimum()
     elif ch==3:
         absent()
     elif ch==4:
-        fre()
+        frequency()
     elif ch==5:
         False
         break
     else:
         print("Enter a valid choice")
+
     
