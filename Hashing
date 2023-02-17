@@ -54,6 +54,7 @@ class hashing{
 			int search;
 			cout<<"Enter the key to search:";
 			cin>>search;
+			bool found=false;
 			int loc=search%10;
 			node* temp=hashtable[loc];
 			if(temp==NULL){
@@ -62,12 +63,17 @@ class hashing{
 			else{
 				while(temp!=NULL){
 					if(temp->data==search){
-						cout<<"Element Found";
+						found=true;
 						break;
 					}
-					else{
-						cout<<"Element Not Found";
-					}
+					temp=temp->next;
+					
+				}
+				if(found){
+					cout<<"Element found";
+				}
+				else{
+					cout<<"Element not found";
 				}
 			}
 		}
