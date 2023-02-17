@@ -2,7 +2,7 @@
 using namespace std;
 class node{
 	public:
-		int data;
+		long long data;
 		node* next;
 };
 class hashing{
@@ -14,7 +14,7 @@ class hashing{
 			}
 		}
 		void insert(){
-			int key;
+			long long key;
 			cout<<"Enter the telephone number:";
 			cin>>key;
 			node* newnode=new node();
@@ -51,7 +51,7 @@ class hashing{
 		}
 		
 		void search(){
-			int search;
+			long long search;
 			cout<<"Enter the key to search:";
 			cin>>search;
 			bool found=false;
