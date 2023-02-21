@@ -3,7 +3,7 @@ using namespace std;
 class hashing1{
 	public:
 		long long hashtable[10];
-		hashing(){
+		hashing1(){
 			for(int i=0;i<10;i++){
 				hashtable[i]=-1;
 			}
@@ -77,7 +77,7 @@ class node{
 class hashing2{
 	public:
 		node* hashtable[10];
-		hashing(){
+		hashing2(){
 			for(int i=0;i<10;i++){
 				hashtable[i]=NULL;
 			}
@@ -107,7 +107,7 @@ class hashing2{
 			for(int i=0;i<10;i++){
 				node* temp=hashtable[i];
 				if(hashtable[i]==NULL){
-					cout<<"0"<<endl;
+					cout<<"--"<<endl;
 				}
 				else{
 					while(temp!=NULL){
@@ -155,7 +155,7 @@ int main(){
 	int ch1;
 	int ch2;
 	while(1){
-		cout<<"\n1.Open adressing\n2.Closed chaining";
+		cout<<"\n1.Seperate Chaining\n2.Linear Probbing";
 		cout<<"\nEnter a choice:";
 		cin>>ch;
 		if(ch==1){
@@ -163,7 +163,7 @@ int main(){
 				
 				while(1){
 				cout<<"\n1.Insert\n2.Display\n3.Search\n4.Exit";
-				cout<<"\nEnter a choice";
+				cout<<"\nEnter a choice:";
 				cin>>ch1;
 				
 				switch(ch1){
@@ -190,7 +190,7 @@ int main(){
 				
 				while(1){
 					cout<<"\n1.Insert\n2.Display\n3.Search\n4.Exit";
-					cout<<"\nEnter a choice";
+					cout<<"\nEnter a choice:";
 					cin>>ch2;
 					switch(ch2){
 						case 1:
@@ -219,3 +219,4 @@ int main(){
 	}
 	return 0;
 }
+
