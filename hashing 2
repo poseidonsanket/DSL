@@ -1,0 +1,97 @@
+#include<bits/stdc++.h>
+using namespace std;
+class hashing{
+	public:
+		long long hashtable[10];
+		hashing(){
+			for(int i=0;i<10;i++){
+				hashtable[i]=-1;
+			}
+		}
+		void insert(){
+			long long key;
+			cout<<"Enter a key:";
+			cin>>key;
+			int loc=key%10;
+			
+			for(int i=0;i<10;i++){
+			
+			if(hashtable[loc]==-1){
+				
+				hashtable[loc]=key;
+				break;
+			}
+			else{
+				
+				loc=(loc+1)%10;
+				
+			}
+		}
+		
+		}
+		void display(){
+			for(int i=0;i<10;i++){
+				if(hashtable[i]==-1){
+					cout<<"--"<<endl;
+				}
+				else{
+					cout<<hashtable[i]<<endl;
+				}
+			}
+		}
+		void search(){
+			long long search;
+			cout<<"Enter the key to search:";
+			cin>>search;
+			int loc=search%10;
+			bool flag=false;
+			for(int i=0;i<10;i++){
+			
+			if(hashtable[loc]==-1){
+				cout<<"Element Not Found";
+			}
+			if(hashtable[loc]==search){
+				flag=true;
+			}
+			else{
+				loc=(loc+1)%10;
+				if(hashtable[loc]==search){
+				flag=true;
+				}
+			}
+		}
+			if(flag){
+				cout<<"Element Found";
+			}
+			else{
+				cout<<"Element Not Found";
+			}
+		}
+};
+int main(){
+	hashing obj;
+	int ch;
+	while(1){
+		cout<<"\n1.Insert\n2.Display\n3.Search\n4.Exit";
+		cout<<"\nEnter a choice:";
+		cin>>ch;
+		switch(ch){
+			case 1:
+				obj.insert();
+				break;
+			case 2:
+				obj.display();
+				break;
+			case 3:
+				obj.search();
+				break;
+			case 4:
+				exit(1);
+				break;
+			default:
+				cout<<"Enter a valid choice";
+			
+		}
+	}
+	return 0;
+}
