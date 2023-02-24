@@ -1,0 +1,93 @@
+
+#include<bits/stdc++.h>
+using namespace std;
+// #define n 20
+class set1{
+	public:
+		int arr[20];
+		set1(){
+			for(int i=0;i<20;i++){
+				arr[i]=-1;
+			}
+		}
+		void insert(){
+			int key;
+			cout<<"Enter a element to insert:";
+			cin>>key;
+			int loc=0;
+			
+			for(int i=0;i<20;i++){
+			
+				if(arr[loc]==-1){
+					arr[loc]=key;
+				}
+				else if(arr[loc]!=-1 && arr[loc]==key){
+					break;
+				}
+				else{
+					loc=loc+1;
+				}
+			}
+			
+		}
+		void display(){
+			for(int i=0;i<20;i++){
+				if(arr[i]==-1){
+					cout<<"--"<<endl;
+				}
+				else{
+				
+				cout<<arr[i]<<endl;
+			}
+			}
+			
+		}
+		void del(){
+			int key;
+			cout<<"Enter Element to delete:";
+			cin>>key;
+			int i;
+			int n=20;
+			for(i=0;i<n;i++){
+				if(arr[i]==key){
+					break;
+				}
+			}
+			if(i<n){
+				n--;
+				for(int j=i;j<n;j++){
+					arr[j]=arr[j+1];
+				}
+			}
+// 			cout<<n;
+		}
+};
+int main(){
+	set1 s;
+	int ch;
+	while(1){
+		cout<<"\n1.Insert\n2.Display\n3.Delete\n4.Exit";
+		cout<<"Enter a choice:";
+		cin>>ch;
+		switch(ch){
+			case 1:
+				s.insert();
+				break;		
+			case 2:
+				s.display();
+				break;
+			case 3:
+				s.del();
+				// exit(1);
+				break;
+			case 4:
+				exit(1);
+			default:
+				cout<<"Enter a valid choice";	
+			}
+		}
+	return 0;	
+}
+
+
+
