@@ -1,13 +1,14 @@
 
 #include<bits/stdc++.h>
 using namespace std;
-// #define n 20
 class set1{
 	public:
-		int arr[20];
+		int arr1[20];
+		int arr2[20];
 		set1(){
 			for(int i=0;i<20;i++){
-				arr[i]=-1;
+				arr1[i]=-1;
+				arr2[i]=-1;
 			}
 		}
 		void insert(){
@@ -18,10 +19,10 @@ class set1{
 			
 			for(int i=0;i<20;i++){
 			
-				if(arr[loc]==-1){
-					arr[loc]=key;
+				if(arr1[loc]==-1){
+					arr1[loc]=key;
 				}
-				else if(arr[loc]!=-1 && arr[loc]==key){
+				else if(arr1[loc]!=-1 && arr1[loc]==key){
 					break;
 				}
 				else{
@@ -32,13 +33,13 @@ class set1{
 		}
 		void display(){
 			for(int i=0;i<20;i++){
-				if(arr[i]==-1){
+				if(arr1[i]==-1){
 					cout<<"--"<<endl;
 				}
 				else{
 				
-				cout<<arr[i]<<endl;
-			}
+				cout<<arr1[i]<<endl;
+			    }
 			}
 			
 		}
@@ -49,24 +50,122 @@ class set1{
 			int i;
 			int n=20;
 			for(i=0;i<n;i++){
-				if(arr[i]==key){
+				if(arr1[i]==key){
 					break;
 				}
 			}
 			if(i<n){
 				n--;
 				for(int j=i;j<n;j++){
-					arr[j]=arr[j+1];
+					arr1[j]=arr1[j+1];
 				}
 			}
-// 			cout<<n;
 		}
+		void search(){
+		    int search;
+		    bool flag=false;
+		    cout<<"Enter the search element:";
+		    cin>>search;
+		    for(int i=0;i<20;i++){
+		        if(arr1[i]==search){
+		            flag=true;
+		            break;
+		        }
+		    }
+		    if(flag){
+		        cout<<"Element is found";
+		    }
+		    else{
+		        cout<<"Element not found";
+		    }
+		}
+		
+		int count(){
+		    int cnt=0;
+		    for(int i=0;i<20;i++){
+		        if(arr1[i]!=-1){
+		            cnt++;
+		        }
+		    }
+		    return cnt;
+		}
+		
+		void union1(){
+		    string reply;
+		    cout<<"Enter 1st set";
+		    do{
+		        insert();
+		        cout<<"Do you want to continue(y/n):";
+		        cin>>reply;
+		    }
+		    while(reply!="n");
+		        
+		    cout<<"Enter 2nd set:";
+		    do{
+		        int key;
+			    cout<<"Enter a element to insert:";
+			    cin>>key;
+			    int loc=0;
+			
+			    for(int i=0;i<20;i++){
+			
+				    if(arr1[loc]==-1){
+    					arr1[loc]=key;
+				    }
+				    else if(arr1[loc]!=-1 && arr1[loc]==key){
+					    break;
+				    }
+				    else{
+        				loc=loc+1;
+				    }
+			    }
+			    cout<<"Do you want to continue(y/n):";
+		        cin>>reply;
+		    }
+		    while(reply!="n");
+			int cnt2=0;
+			for(int i=0;i<20;i++){
+		        if(arr2[i]!=-1){
+		            cnt2++;
+		        }
+		    }
+		    int m=count();
+		    int n=cnt2;
+		    int arr3[20];
+		    int k=0;
+		    for(int i=0;i<m;i++){
+		        arr3[k]=arr1[i];
+		        k++;
+		    }
+		    for(int i=0;i<m;i++){
+		        for(int j=0;j<m;j++){
+		            if(arr1[i]==arr2[j]){
+		                break;
+		            }
+		            else{
+		                arr3[k]=arr2[j];
+		                k++;
+		            }
+		        }
+		    }
+		    cout<<"Union";
+		    for(int i=0;i<k;i++){
+		        if(arr3[i]==-1){
+		            break;
+		        }
+		        else{
+		        cout<<arr3[i]<<",";
+		        }
+		    }
+		    
+			
+	    }
 };
 int main(){
 	set1 s;
 	int ch;
 	while(1){
-		cout<<"\n1.Insert\n2.Display\n3.Delete\n4.Exit";
+		cout<<"\n1.Insert\n2.Display\n3.Delete\n4.Search\n5.Count\n6.Union\n7.Exit\n";
 		cout<<"Enter a choice:";
 		cin>>ch;
 		switch(ch){
@@ -78,16 +177,21 @@ int main(){
 				break;
 			case 3:
 				s.del();
-				// exit(1);
 				break;
 			case 4:
-				exit(1);
+				s.search();
+				break;
+			case 5:
+			    s.count();
+			    break;
+			case 6:
+			    s.union1();
+			    break;
+			case 7:
+			    exit(1);
 			default:
 				cout<<"Enter a valid choice";	
 			}
 		}
 	return 0;	
 }
-
-
-
